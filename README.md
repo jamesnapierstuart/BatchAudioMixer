@@ -16,6 +16,6 @@ The mixed audio file will be normalised
 Requires Python 3 or later  
 Requires Sox
 
-From the terminal / command prompt run the following command:
+From the terminal / command prompt run the following command in the same directory as the python script:
 
 python3 BatchAudioMixer.py
