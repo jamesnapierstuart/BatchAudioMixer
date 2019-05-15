@@ -11,14 +11,14 @@ print("\nA new 'BatchAudioMixerOutput' directory will be created in the selected
 print("A new 'BatchAudioMixer_DATETIME.wav' file will be placed here")
 print("\nPlease select a directory containing 2 or more audio files...\n")
 
-# Import package "pydub" if user doesn't have it
-import pip
+# Import package "sox" if user doesn't have it
+from pip._internal import main
 
 def import_or_install(package):
     try:
         __import__(package)
     except ImportError:
-        pip.main(['install', package]) 
+        main(['install', package]) 
 
 import_or_install("sox")
 
