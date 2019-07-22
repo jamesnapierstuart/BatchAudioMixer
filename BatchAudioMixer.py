@@ -1,6 +1,13 @@
-# BatchAudioMixer
-# 15/05/2019
-# Jstuart RStack
+"""
+BatchAudioMixer
+22/07/2019
+Jstuart RStack SDoyle
+"""
+
+import os
+import subprocess
+from datetime import datetime
+from tkinter import Tk, filedialog
 
 version = 1.0
 print("\n///////////////////////////////////////////////////////////////////////////////////////////")
@@ -10,24 +17,6 @@ print("BatchAudioMixer supports .wav .aif .mp3")
 print("\nA new 'BatchAudioMixerOutput' directory will be created in the selected directory")
 print("A new 'BatchAudioMixer_DATETIME.wav' file will be placed here")
 print("\nPlease select a directory containing 2 or more audio files...\n")
-
-# Import package "sox" if user doesn't have it
-from pip._internal import main
-
-def import_or_install(package):
-    try:
-        __import__(package)
-    except ImportError:
-        main(['install', package])
-
-import_or_install("sox")
-
-# Sox also needs to be downloaded on the users machine
-import sox
-import os
-import subprocess
-import datetime
-from tkinter import Tk, filedialog
 
 root = Tk()
 root.withdraw()
@@ -49,14 +38,18 @@ out_dir = os.path.join(in_dir, "BatchAudioMixerOutput")
 if not os.path.isdir(out_dir):
     os.mkdir(out_dir)
 
-out_file = "mergedOutput_" + str(datetime.datetime.now().isoformat()) + ".wav"
+out_file = "mergedOutput_" + str(datetime.now().isoformat()) + ".wav"
 out_path = os.path.join(out_dir, out_file)
 
 cmd = "sox -m -S --norm " + ' '.join(wav_files)
 cmd += f' {out_path}'
 
 print("Executing Sox merge...")
-subprocess.run([cmd], shell=True)
+try:
+    subprocess.run([cmd], shell=True)
+except FileNotFoundError:
+    print('Sox executable not found, ensure sox is installed on user machine')
+    exit(2)
 
 print("\nCreated new file:", out_path)
 print("BatchAudioMixer complete.")
