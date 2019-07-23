@@ -2,7 +2,7 @@
 BatchAudioMixer mixes n number of audio files in a directory to a single audio file  
   
 ## Credits
-Built by Jamie Stuart & Ross Stack  
+Built by Jamie Stuart, Ross Stack & Sam Doyle
   
 ## Overview
 BatchAudioMixer takes audio files in a selected directory and mixes them together  
