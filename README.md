@@ -25,3 +25,4 @@ Input files must have the same sample-rate
 tkinter crashes on Linux - Need to investigate  
 We don't user the Sox wrapper module for Python  
 Can't install pip modules without root user priviledges - should use pip freeze instead  
+Can't use spaces with input directories
