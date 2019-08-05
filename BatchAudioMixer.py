@@ -12,6 +12,7 @@ Jstuart RStack SDoyle
 # Spaces in directory names cause the subprocess sox call to fail
 
 import os
+from sys import exit
 import subprocess
 from datetime import datetime
 from tkinter import Tk, filedialog
@@ -29,6 +30,7 @@ print("\nPlease select a directory containing 2 or more audio files...\n")
 root = Tk()
 root.withdraw()
 dialog_in_dir = filedialog.askdirectory()
+
 in_dir = Path(dialog_in_dir)
 
 if not dialog_in_dir or not in_dir.exists():
@@ -47,11 +49,13 @@ out_dir = in_dir / "BatchAudioMixerOutput"
 if not out_dir.exists():
     Path.mkdir(out_dir)
 
-out_file = "mergedOutput_" + str(datetime.now().isoformat()) + ".wav"
+dateAndTimeFormatted = datetime.now().strftime("%y_%m_%d_%I_%M_%S")
+
+out_file = "mergedOutput_" + dateAndTimeFormatted + ".wav"
 out_file = out_dir / out_file
 
 cmd = "sox -m -S --norm " + ' '.join(wav_files)
-cmd += f' {str(Path(out_file))}'
+cmd += f'"{str(Path(out_file))}" '
 
 print(cmd)
 
